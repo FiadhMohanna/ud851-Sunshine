@@ -17,6 +17,7 @@ package com.example.android.sunshine;
 
 import android.content.Context;
 import android.content.Intent;
+import android.icu.util.UniversalTimeScale;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -220,8 +221,19 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
             loadWeatherData();
             return true;
         }
-
         // TODO (2) Launch the map when the map menu item is clicked
+        else if (id == R.id.action_map){
+            String address = "The White House";
+            Uri.Builder builder = new Uri.Builder()
+                    .scheme("geo")
+                    .path("0,0")
+                    .appendQueryParameter("q", address);
+            Uri uri = builder.build();
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(uri);
+            startActivity(intent);
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
